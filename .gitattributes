@@ -1,0 +1,6 @@
+# Ensure text files use LF in the repository
+* text=auto eol=lf
+
+# Explicitly set binary files (no line-ending conversion)
+*.png binary
+*.jpg binary
