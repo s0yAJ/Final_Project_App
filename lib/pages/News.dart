@@ -13,6 +13,11 @@ class _NewsState extends State<News> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(40),
+        child: Center(
+          child: Column(
+            children: [Text("News: ")],
+          ),
+        ),
       ),
     );
   }
