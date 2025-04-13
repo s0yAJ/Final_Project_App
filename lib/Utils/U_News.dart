@@ -1,4 +1,4 @@
-import 'package:final_proyect/Models/NewModel.dart';
+import 'package:final_proyect/Models/NewsModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
