@@ -11,19 +11,19 @@ class NewModels {
     if (json['datos'] != null) {
       datos = <Datos>[];
       json['datos'].forEach((v) {
-        datos!.add(new Datos.fromJson(v));
+        datos!.add(Datos.fromJson(v));
       });
     }
     mensaje = json['mensaje'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['exito'] = this.exito;
-    if (this.datos != null) {
-      data['datos'] = this.datos!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['exito'] = exito;
+    if (datos != null) {
+      data['datos'] = datos!.map((v) => v.toJson()).toList();
     }
-    data['mensaje'] = this.mensaje;
+    data['mensaje'] = mensaje;
     return data;
   }
 }
@@ -46,12 +46,12 @@ class Datos {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['fecha'] = this.fecha;
-    data['titulo'] = this.titulo;
-    data['contenido'] = this.contenido;
-    data['foto'] = this.foto;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['fecha'] = fecha;
+    data['titulo'] = titulo;
+    data['contenido'] = contenido;
+    data['foto'] = foto;
     return data;
   }
 }
