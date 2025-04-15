@@ -1,5 +1,6 @@
-import 'package:final_proyect/Utils/U_News.dart';
 import 'package:flutter/material.dart';
+import 'package:final_proyect/Utils/U_News.dart';
+import 'package:final_proyect/Models/NewsModel.dart';
 
 class News extends StatefulWidget {
   const News({super.key});
@@ -9,60 +10,85 @@ class News extends StatefulWidget {
 }
 
 class _NewsState extends State<News> {
+  late Future<NewModels> futureNoticias;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    reloadNews();
+    futureNoticias =
+        news_api().GetAllNews(); // Esto ahora devuelve Future<NewModels>
   }
 
-  void reloadNews() async {
-    await news_api().GetAllNews();
-  } 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(40),
-          child: Center(
-            child: Column(
-              children: [
-                ListView.builder(
-                  itemCount: Result_of_news?.first.datos?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final dato = Result_of_news?.first.datos?[index];
-                    return Card(
-                      margin: EdgeInsets.all(8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.network(dato?.foto ?? "https://us.123rf.com/450wm/bsd555/bsd5552110/bsd555211000002/177453824-sceptical-view-rgb-color-icon-scepticism-doubting-and-questioning-mindset-scientific-and.jpg?ver=6"),
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    title: Text(
-                                        dato?.titulo ?? "Not title to show: "),
-                                    subtitle: Text(
-                                        dato?.contenido ?? "Not content: "),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+      backgroundColor: Colors.amber[700],
+      appBar: AppBar(title: const Text('Noticias')),
+      body: FutureBuilder<NewModels>(
+        future: futureNoticias,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return const Center(child: Text('Error al cargar las noticias'));
+          }
+
+          if (!snapshot.hasData ||
+              snapshot.data!.datos == null ||
+              snapshot.data!.datos!.isEmpty) {
+            return const Center(child: Text('No hay noticias disponibles'));
+          }
+
+          final datos = snapshot.data!.datos!;
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(12),
+            itemCount: datos.length,
+            itemBuilder: (context, index) {
+              final noticia = datos[index];
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                elevation: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (noticia.foto != null && noticia.foto!.isNotEmpty)
+                      Image.network(
+                        noticia.foto!,
+                        width: double.infinity,
+                        height: 180,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.broken_image, size: 100),
+                      )
+                    else
+                      const SizedBox(
+                        height: 180,
+                        child: Center(child: Icon(Icons.image_not_supported)),
                       ),
-                    );
-                  },
-                )
-              ],
-            ),
-          ),
-        ),
+                    Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: ListTile(
+                        title: Text(
+                          noticia.titulo ?? "Sin título",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                        subtitle: Text(
+                          noticia.contenido ?? "Sin contenido",
+                          maxLines: 4,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

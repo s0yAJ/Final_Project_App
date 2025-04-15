@@ -4,21 +4,27 @@ import 'dart:convert';
 
 List<NewModels>? Result_of_news = [];
 
-class news_api{
-
-  Future<void> GetAllNews() async{
-    try{
-      final url = Uri.parse("https://adamix.net/defensa_civil/def/noticias.php");
-
+class news_api {
+  Future<NewModels> GetAllNews() async {
+    try {
+      final url =
+          Uri.parse("https://adamix.net/defensa_civil/def/noticias.php");
       final response = await http.get(url);
 
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
 
-        Result_of_news = data.map((dynamic items) => NewModels.fromJson(items)).toList();
+        Result_of_news = (data['datos'] as List)
+            .map((dynamic item) => NewModels.fromJson(item))
+            .toList();
+
+        return NewModels.fromJson(data);
+      } else {
+        throw Exception('Failed to load news');
       }
-    }catch(ex){
+    } catch (ex) {
       print(ex.toString());
+      rethrow;
     }
   }
 }
