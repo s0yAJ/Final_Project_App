@@ -4,6 +4,7 @@ import 'package:final_proyect/pages/Home.dart';
 import 'package:final_proyect/pages/Services.dart';
 import 'package:final_proyect/pages/Shelters.dart';
 import 'package:flutter/material.dart';
+import 'package:final_proyect/pages/splashScreen.dart'; // ⬅️ Aquí importamos el SplashScreen
 
 import 'pages/News.dart';
 
@@ -14,16 +15,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: !true,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Navigation_bar(),
+      home: const SplashScreen(),
+      routes: {
+        '/home': (context) => const Navigation_bar(),
+      },
     );
   }
 }
