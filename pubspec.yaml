@@ -39,6 +39,8 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   flutter_map: ^6.1.0
   latlong2: ^0.9.1
+  font_awesome_flutter: ^10.7.0
+  animate_do: ^3.3.4
 
 dev_dependencies:
   flutter_test:
