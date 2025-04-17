@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:final_proyect/pages/splashScreen.dart';
+import 'package:final_proyect/pages/login_screen.dart'; // Asegúrate de importar tu LoginScreen
 import 'package:final_proyect/pages/News.dart';
 import 'package:final_proyect/pages/History.dart';
 import 'package:final_proyect/pages/Home.dart';
@@ -25,7 +26,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const SplashScreen(),
       routes: {
-        '/home': (context) => const NavigationBar(),
+        '/login': (context) => const LoginScreen(), // Ruta para el login
+        '/home': (context) =>
+            const NavigationBar(), // Ruta para la app principal
       },
     );
   }
