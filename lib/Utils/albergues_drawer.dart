@@ -1,5 +1,5 @@
 import 'package:final_proyect/pages/Measures.dart';
-import 'package:final_proyect/Utils/mapaview.dart';
+import 'package:final_proyect/utils/mapaview.dart';
 import 'package:flutter/material.dart';
 
 class AlberguesDrawer extends StatelessWidget {
