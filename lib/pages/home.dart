@@ -71,20 +71,27 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final topPadding = MediaQuery.of(context).padding.top;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
+    return Padding(
+      padding: EdgeInsets.all(30),
+      child: SafeArea(
         bottom: false,
         child: Column(
           children: [
             SizedBox(height: topPadding > 30 ? 10 : 20),
-            Image.asset(
-              'assets/banner.png',
-              width: MediaQuery.of(context).size.width,
-              height: 125,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(35),
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(7),
+                child: Image.asset(
+                  'assets/banner.png',
+                  width: MediaQuery.of(context).size.width,
+                  height: 125,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             SizedBox(
               height: 200,
               child: PageView.builder(
@@ -116,8 +123,8 @@ class _HomeState extends State<Home> {
               effect: const WormEffect(
                 dotHeight: 8,
                 dotWidth: 8,
-                activeDotColor: Colors.orange,
-                dotColor: Colors.grey,
+                activeDotColor: Colors.black,
+                dotColor: Colors.white,
               ),
             ),
             const SizedBox(height: 10),

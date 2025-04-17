@@ -20,10 +20,11 @@ class _NewsState extends State<News> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.amber[700],
-      appBar: AppBar(title: const Text('Noticias')),
-      body: FutureBuilder<NewModels>(
+    return Padding(
+      padding: EdgeInsets.all(20),
+      //backgroundColor: Colors.amber[700],
+      //appBar: AppBar(title: const Text('Noticias')),
+      child: FutureBuilder<NewModels>(
         future: futureNoticias,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -43,7 +44,7 @@ class _NewsState extends State<News> {
           final datos = snapshot.data!.datos!;
 
           return ListView.builder(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.symmetric(vertical: 50),
             itemCount: datos.length,
             itemBuilder: (context, index) {
               final noticia = datos[index];
@@ -54,13 +55,19 @@ class _NewsState extends State<News> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (noticia.foto != null && noticia.foto!.isNotEmpty)
-                      Image.network(
+                      ClipRRect(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(13),
+                          bottom: Radius.zero
+                        ),
+                        child: Image.network(
                         noticia.foto!,
                         width: double.infinity,
                         height: 180,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
                             const Icon(Icons.broken_image, size: 100),
+                      )
                       )
                     else
                       const SizedBox(
