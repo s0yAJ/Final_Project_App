@@ -70,6 +70,7 @@ flutter:
       - assets/acciones2.jpeg
       - assets/acciones3.jpg
       - assets/banner.png
+      - assets/icono.jpeg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
