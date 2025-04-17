@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:final_proyect/Utils/U_News.dart';
 import 'package:final_proyect/Models/NewsModel.dart';
+import 'package:final_proyect/Utils/albergues_drawer.dart';
 
 class News extends StatefulWidget {
   const News({super.key});
@@ -21,6 +22,7 @@ class _NewsState extends State<News> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AlberguesDrawer(),
       backgroundColor: Colors.amber[700],
       appBar: AppBar(title: const Text('Noticias')),
       body: FutureBuilder<NewModels>(

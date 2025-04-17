@@ -1,3 +1,4 @@
+import 'package:final_proyect/pages/albergues_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'dart:async';
@@ -32,7 +33,7 @@ class _HomeState extends State<Home> {
       'color': Colors.blue
     },
     {'icon': Icons.info, 'title': 'Acerca de', 'color': Colors.green},
-    {'icon': Icons.phone, 'title': 'Contactos', 'color': Colors.orange},
+    {'icon': Icons.house, 'title': 'Albergues', 'color': Colors.orange},
   ];
 
   Timer? _timer;
@@ -167,6 +168,13 @@ class _HomeState extends State<Home> {
               context,
               MaterialPageRoute(
                 builder: (context) => AcercaPage(),
+              ),
+            );
+          } else if (title == 'Albergues') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AlberguesScreen(),
               ),
             );
           } else {
