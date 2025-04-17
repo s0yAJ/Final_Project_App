@@ -1,12 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:final_proyect/pages/splashScreen.dart';
+import 'package:final_proyect/pages/News.dart';
 import 'package:final_proyect/pages/History.dart';
 import 'package:final_proyect/pages/Home.dart';
 import 'package:final_proyect/pages/Services.dart';
 import 'package:final_proyect/pages/Shelters.dart';
-import 'package:flutter/material.dart';
-import 'package:final_proyect/pages/splashScreen.dart'; // ⬅️ Aquí importamos el SplashScreen
-
-import 'pages/News.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,55 +24,58 @@ class MyApp extends StatelessWidget {
       ),
       home: const SplashScreen(),
       routes: {
-        '/home': (context) => const Navigation_bar(),
+        '/home': (context) => const NavigationBar(),
       },
     );
   }
 }
 
-class Navigation_bar extends StatefulWidget {
-  const Navigation_bar({super.key});
+class NavigationBar extends StatefulWidget {
+  const NavigationBar({super.key});
 
   @override
-  State<Navigation_bar> createState() => _Navigation_barState();
+  State<NavigationBar> createState() => _NavigationBarState();
 }
 
-class _Navigation_barState extends State<Navigation_bar> {
-  int pageNum = 0;
-  final keynavigation = GlobalKey<CurvedNavigationBarState>();
+class _NavigationBarState extends State<NavigationBar> {
+  int _currentIndex = 2; // Índice inicial centrado en Home
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
-  final ICONS = [
-    const Icon(Icons.newspaper),
-    const Icon(Icons.history_edu_outlined),
-    const Icon(Icons.home),
-    const Icon(Icons.supervisor_account_sharp),
-    const Icon(Icons.location_pin),
-  ];
-
-  final screen = [
-    News(),
-    History(),
-    Home(),
-    Services(),
-    Shelters(),
+  final List<Widget> _screens = [
+    const News(),
+    const History(),
+    const Home(),
+    const Services(),
+    const Shelters(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amber[700],
-      body: screen[pageNum],
+      body: _screens[_currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
-        key: keynavigation,
-        backgroundColor: Colors.transparent,
-        items: ICONS,
-        animationDuration: const Duration(milliseconds: 700),
-        index: pageNum,
+        key: _bottomNavigationKey,
+        index: _currentIndex,
+        height: 60.0,
+        items: const [
+          Icon(Icons.newspaper, size: 30),
+          Icon(Icons.history_edu_outlined, size: 30),
+          Icon(Icons.home, size: 30),
+          Icon(Icons.supervisor_account_sharp, size: 30),
+          Icon(Icons.location_pin, size: 30),
+        ],
+        color: Colors.white,
+        buttonBackgroundColor: Colors.white,
+        backgroundColor: Colors.amber[700]!,
+        animationCurve: Curves.easeInOut,
+        animationDuration: const Duration(milliseconds: 300),
         onTap: (index) {
           setState(() {
-            pageNum = index;
+            _currentIndex = index;
           });
         },
+        letIndexChange: (index) => true,
       ),
     );
   }
