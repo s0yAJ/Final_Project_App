@@ -62,23 +62,15 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // Obtener el padding superior (incluye espacio para cámara/notch)
     final topPadding = MediaQuery.of(context).padding.top;
 
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          // Widget SafeArea para manejar áreas no seguras
-          bottom: false, // Solo aplicamos SafeArea en la parte superior
+          bottom: false,
           child: Column(
             children: [
-              // Espacio personalizado arriba del banner
-              SizedBox(
-                  height: topPadding > 30
-                      ? 10
-                      : 20), // Espacio adicional si hay notch
-
-              // Banner superior
+              SizedBox(height: topPadding > 30 ? 10 : 20),
               Image.asset(
                 'assets/banner.png',
                 width: MediaQuery.of(context).size.width,
@@ -86,10 +78,8 @@ class _HomeState extends State<Home> {
                 fit: BoxFit.cover,
               ),
               const SizedBox(height: 10),
-
-              // Slider más compacto
               SizedBox(
-                height: 200, // Reducida la altura del slider
+                height: 200,
                 child: PageView.builder(
                   controller: _pageController,
                   itemCount: imageList.length,
@@ -113,9 +103,7 @@ class _HomeState extends State<Home> {
                   },
                 ),
               ),
-              const SizedBox(height: 8), // Espacio reducido
-
-              // Indicador de página
+              const SizedBox(height: 8),
               SmoothPageIndicator(
                 controller: _pageController,
                 count: imageList.length,
@@ -126,9 +114,7 @@ class _HomeState extends State<Home> {
                   dotColor: Colors.grey,
                 ),
               ),
-              const SizedBox(height: 10), // Espacio reducido
-
-              // Grid de opciones
+              const SizedBox(height: 10),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
