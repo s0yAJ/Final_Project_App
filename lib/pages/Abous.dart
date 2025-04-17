@@ -20,7 +20,7 @@ class AcercaPage extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 60,
-                backgroundImage: AssetImage('assets/icono.png'),
+                backgroundImage: AssetImage('assets/icono.jpeg'),
               ),
               SizedBox(height: 16),
               Text(
