@@ -1,3 +1,4 @@
+import 'package:final_proyect/pages/MiembrosPage.dart';
 import 'package:final_proyect/pages/albergues_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -27,11 +28,7 @@ class _HomeState extends State<Home> {
       'title': 'Medidas Preventivas',
       'color': Colors.red
     },
-    {
-      'icon': Icons.medical_services,
-      'title': 'Emergencias',
-      'color': Colors.blue
-    },
+    {'icon': Icons.person_4_sharp, 'title': 'Miembros', 'color': Colors.blue},
     {'icon': Icons.info, 'title': 'Acerca de', 'color': Colors.green},
     {'icon': Icons.house, 'title': 'Albergues', 'color': Colors.orange},
   ];
@@ -175,6 +172,13 @@ class _HomeState extends State<Home> {
               context,
               MaterialPageRoute(
                 builder: (context) => AcercaPage(),
+              ),
+            );
+          } else if (title == 'Miembros') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MiembrosPage(),
               ),
             );
           } else if (title == 'Albergues') {
