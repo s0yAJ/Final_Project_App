@@ -15,8 +15,7 @@ class _NewsState extends State<News> {
   @override
   void initState() {
     super.initState();
-    futureNoticias =
-        news_api().GetAllNews(); // Esto ahora devuelve Future<NewModels>
+    futureNoticias = news_api().GetAllNews();
   }
 
   @override
