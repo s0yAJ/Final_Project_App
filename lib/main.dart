@@ -46,7 +46,7 @@ class _NavigationBarState extends State<NavigationBar> {
     const History(),
     const Home(),
     const Services(),
-    const Shelters(),
+    const MapScreen(),
   ];
 
   @override
