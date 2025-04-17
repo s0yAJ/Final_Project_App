@@ -6,6 +6,7 @@ import 'package:final_proyect/pages/History.dart';
 import 'package:final_proyect/pages/Home.dart';
 import 'package:final_proyect/pages/Services.dart';
 import 'package:final_proyect/pages/Shelters.dart';
+import 'package:final_proyect/pages/Abous.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,7 +47,8 @@ class _NavigationBarState extends State<NavigationBar> {
     const History(),
     const Home(),
     const Services(),
-    const Shelters(),
+    const MapScreen(),
+    AcercaPage(),
   ];
 
   @override

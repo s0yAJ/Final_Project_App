@@ -1,22 +1,20 @@
+import 'package:final_proyect/Utils/mapaview.dart';
 import 'package:flutter/material.dart';
 
-class Shelters extends StatefulWidget {
-  const Shelters({super.key});
+class MapScreen extends StatefulWidget {
+  const MapScreen({super.key});
 
   @override
-  State<Shelters> createState() => SsheltersState();
+  _MapScreenState createState() =>
+      _MapScreenState(); // Cambiado a _MapScreenState
 }
 
-class SsheltersState extends State<Shelters> {
+class _MapScreenState extends State<MapScreen> {
+  // Ahora es State<MapScreen>
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(40),
-      child: Center(
-        child: Column(
-          children: [Text("Shelters: ")],
-        ),
-      ),
+    return Scaffold(
+      body: MapaAlbergues(), // MapaAlbergues es un widget independiente
     );
   }
 }

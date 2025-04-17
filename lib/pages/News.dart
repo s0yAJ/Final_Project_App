@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:final_proyect/Utils/U_News.dart';
 import 'package:final_proyect/Models/NewsModel.dart';
+import 'package:final_proyect/Utils/albergues_drawer.dart';
 
 class News extends StatefulWidget {
   const News({super.key});
@@ -20,11 +21,10 @@ class _NewsState extends State<News> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(20),
-      //backgroundColor: Colors.amber[700],
-      //appBar: AppBar(title: const Text('Noticias')),
-      child: FutureBuilder<NewModels>(
+    return Scaffold(
+      backgroundColor: Colors.amber[700],
+      appBar: AppBar(title: const Text('Noticias')),
+      body: FutureBuilder<NewModels>(
         future: futureNoticias,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
