@@ -69,20 +69,28 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final topPadding = MediaQuery.of(context).padding.top;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
+    return Padding(
+      padding: EdgeInsets.all(20),
+      //backgroundColor: Colors.white,
+      child: SafeArea(
         bottom: false,
         child: Column(
           children: [
             SizedBox(height: topPadding > 30 ? 10 : 20),
-            Image.asset(
-              'assets/banner.png',
-              width: MediaQuery.of(context).size.width,
-              height: 125,
-              fit: BoxFit.cover,
+            SizedBox(height:10),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                color: Colors.white,
+                child: Image.asset(
+                  'assets/banner.png',
+                  width: MediaQuery.of(context).size.width,
+                  height: 125,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 25),
             SizedBox(
               height: 200,
               child: PageView.builder(
@@ -107,15 +115,15 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 15),
             SmoothPageIndicator(
               controller: _pageController,
               count: imageList.length,
               effect: const WormEffect(
                 dotHeight: 8,
                 dotWidth: 8,
-                activeDotColor: Colors.orange,
-                dotColor: Colors.grey,
+                activeDotColor: Colors.grey,
+                dotColor: Colors.white,
               ),
             ),
             const SizedBox(height: 10),

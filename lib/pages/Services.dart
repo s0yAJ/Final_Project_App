@@ -39,17 +39,18 @@ class _ServicesState extends State<Services> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber[700],
       appBar: AppBar(
         title: const Text(
           'Servicios',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.amber,
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.orange[700],
+        backgroundColor: Colors.white,
         elevation: 0,
       ),
       body: FutureBuilder<List<Servicio>>(
