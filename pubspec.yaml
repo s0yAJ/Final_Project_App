@@ -41,7 +41,8 @@ dependencies:
   latlong2: ^0.9.1
   font_awesome_flutter: ^10.7.0
   animate_do: ^3.3.4
-
+  youtube_player_flutter: ^9.1.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

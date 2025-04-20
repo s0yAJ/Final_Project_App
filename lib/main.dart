@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:final_proyect/pages/Videos.dart';
 import 'package:flutter/material.dart';
 import 'package:final_proyect/pages/splashScreen.dart';
 import 'package:final_proyect/pages/login_screen.dart'; // Asegúrate de importar tu LoginScreen
@@ -50,7 +51,8 @@ class _NavigationBarState extends State<NavigationBar> {
     const History(),
     const Home(),
     const Services(),
-    const MapScreen(),
+    const Video(),
+    // const MapScreen(),
     AcercaPage(),
   ];
 
@@ -68,11 +70,11 @@ class _NavigationBarState extends State<NavigationBar> {
           Icon(Icons.history_edu_outlined, size: 30),
           Icon(Icons.home, size: 30),
           Icon(Icons.supervisor_account_sharp, size: 30),
-          Icon(Icons.location_pin, size: 30),
+          Icon(Icons.play_circle_outlined, size: 30),
         ],
         color: Colors.white,
         buttonBackgroundColor: Colors.white,
-        backgroundColor: Colors.amber[700]!,
+        backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 300),
         onTap: (index) {

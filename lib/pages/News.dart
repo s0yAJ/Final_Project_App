@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:final_proyect/Utils/U_News.dart';
 import 'package:final_proyect/Models/NewsModel.dart';
-import 'package:final_proyect/Utils/albergues_drawer.dart';
+// import 'package:final_proyect/Utils/albergues_drawer.dart';
 
 class News extends StatefulWidget {
   const News({super.key});
@@ -55,13 +55,19 @@ class _NewsState extends State<News> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (noticia.foto != null && noticia.foto!.isNotEmpty)
-                      Image.network(
-                        noticia.foto!,
-                        width: double.infinity,
-                        height: 180,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const Icon(Icons.broken_image, size: 100),
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(13),
+                          topRight: Radius.circular(13)
+                        ),
+                        child: Image.network(
+                          noticia.foto!,
+                          width: double.infinity,
+                          height: 180,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(Icons.broken_image, size: 100),
+                        ),
                       )
                     else
                       const SizedBox(

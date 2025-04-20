@@ -3,7 +3,7 @@ import 'package:final_proyect/pages/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 
 // Widgets
 import 'package:final_proyect/widgets/inputlogin.dart';
