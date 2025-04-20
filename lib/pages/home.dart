@@ -70,18 +70,30 @@ class _HomeState extends State<Home> {
     final topPadding = MediaQuery.of(context).padding.top;
 
     return Padding(
+<<<<<<< HEAD
       padding: EdgeInsets.all(20),
       //backgroundColor: Colors.white,
+=======
+      padding: EdgeInsets.all(30),
+>>>>>>> f958f4b1c59657fe496afe6dfa0bc8554c4ee0c7
       child: SafeArea(
         bottom: false,
         child: Column(
           children: [
             SizedBox(height: topPadding > 30 ? 10 : 20),
+<<<<<<< HEAD
             SizedBox(height:10),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Container(
                 color: Colors.white,
+=======
+            ClipRRect(
+              borderRadius: BorderRadius.circular(35),
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(7),
+>>>>>>> f958f4b1c59657fe496afe6dfa0bc8554c4ee0c7
                 child: Image.asset(
                   'assets/banner.png',
                   width: MediaQuery.of(context).size.width,
@@ -90,7 +102,11 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
+<<<<<<< HEAD
             const SizedBox(height: 25),
+=======
+            const SizedBox(height: 20),
+>>>>>>> f958f4b1c59657fe496afe6dfa0bc8554c4ee0c7
             SizedBox(
               height: 200,
               child: PageView.builder(
@@ -122,7 +138,11 @@ class _HomeState extends State<Home> {
               effect: const WormEffect(
                 dotHeight: 8,
                 dotWidth: 8,
+<<<<<<< HEAD
                 activeDotColor: Colors.grey,
+=======
+                activeDotColor: Colors.black,
+>>>>>>> f958f4b1c59657fe496afe6dfa0bc8554c4ee0c7
                 dotColor: Colors.white,
               ),
             ),
