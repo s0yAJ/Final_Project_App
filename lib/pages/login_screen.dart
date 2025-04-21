@@ -88,9 +88,13 @@ class LoginDesign extends State<LoginScreen> {
                         ),
                         TextFormField(
                           controller: passWordController,
+                          obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Agrega una contasena!";
+                            }
+                            if(value.length < 4){
+                              return "caracteres minimo es de 4";
                             }
                             return null;
                           },
@@ -107,7 +111,6 @@ class LoginDesign extends State<LoginScreen> {
                                   color: Color.fromRGBO(15, 67, 116, 1)),
                             ),
                           ),
-                          obscureText: false,
                         ),
                       ],
                     ),
