@@ -49,17 +49,19 @@ class _MeasuresState extends State<Measures> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[50], // Fondo más claro para mejor contraste
+      backgroundColor: Colors.amber[700], // Fondo más claro para mejor contraste
       appBar: AppBar(
         title: const Text(
           'Medidas Preventivas',
           style: TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
+        iconTheme: IconThemeData(
+
+          size: 29
+        ),
         centerTitle: true,
-        backgroundColor: Colors.amber[700],
         elevation: 0,
       ),
       body: _buildContent(),
@@ -180,7 +182,7 @@ class _MeasuresState extends State<Measures> {
       ),
     );
   }
-
+/*
   void _showMeasureDetail(Map<String, dynamic> medida) {
     showDialog(
       context: context,
@@ -226,5 +228,60 @@ class _MeasuresState extends State<Measures> {
         ],
       ),
     );
-  }
+  }*/
+
+
+void _showMeasureDetail(Map<String, dynamic> medida) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(
+        medida['titulo']?.toString() ?? 'Medida Preventiva',
+        style: TextStyle(color: Colors.amber[700]),
+      ),
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (medida['foto'] != null && medida['foto'].toString().isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    medida['foto'].toString(),
+                    width: double.infinity,
+                    height: 150,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      height: 150,
+                      color: Colors.grey[200],
+                      child: const Center(
+                        child: Icon(Icons.broken_image, size: 50, color: Colors.grey),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            Text(
+              medida['descripcion']?.toString() ?? 'No hay descripción disponible',
+              textAlign: TextAlign.justify,
+              style: const TextStyle(fontSize: 16, height: 1.5),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(
+            'Cerrar',
+            style: TextStyle(color: Colors.amber[700]),
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }
