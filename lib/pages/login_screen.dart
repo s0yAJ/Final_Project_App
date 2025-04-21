@@ -21,6 +21,7 @@ class LoginScreen extends StatefulWidget {
 class LoginDesign extends State<LoginScreen> {
   TextEditingController userController = TextEditingController();
   TextEditingController passWordController = TextEditingController();
+  final _key = new GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,42 +56,86 @@ class LoginDesign extends State<LoginScreen> {
               ),
               child: Column(
                 children: [
-                  InputLogin(
-                    controller: userController,
-                    mode: TextInputType.name,
-                    title: "Usuario",
-                    inputIcon: FontAwesomeIcons.solidUser,
-                    isPassWord: false,
-                    inputColor: const Color.fromRGBO(239, 121, 42, 1),
-                    description: "Ingrese su Usuario",
-                    inputHintColor: const Color.fromRGBO(239, 121, 42, 0.3),
-                    inputFocusColor: const Color.fromRGBO(15, 67, 116, 1),
+                  Form(
+                    key: _key,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: userController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Agrega un usuario!";
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            labelText: "Usuario",
+                            icon: Icon(FontAwesomeIcons.solidUser,
+                                color: Color.fromRGBO(239, 121, 42, 1)),
+                            hintText: 'Ingrese su Usuario',
+                            hintStyle: TextStyle(
+                                color: Color.fromRGBO(239, 121, 42, 0.3)),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(15, 67, 116, 1)),
+                            ),
+                          ),
+                          obscureText: false,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
+                        ),
+                        TextFormField(
+                          controller: passWordController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Agrega una contasena!";
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            labelText: "Contrasena",
+                            icon: Icon(FontAwesomeIcons.solidUser,
+                                color: Color.fromRGBO(239, 121, 42, 1)),
+                            hintText: 'Ingrese su contrasena',
+                            hintStyle: TextStyle(
+                                color: Color.fromRGBO(239, 121, 42, 0.3)),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(15, 67, 116, 1)),
+                            ),
+                          ),
+                          obscureText: false,
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.04,
-                  ),
-                  InputLogin(
-                    controller: passWordController,
-                    mode: TextInputType.name,
-                    title: "Contraseña",
-                    inputIcon: FontAwesomeIcons.solidUser,
-                    isPassWord: true,
-                    inputColor: const Color.fromRGBO(239, 121, 42, 1),
-                    description: "Ingrese su Contraseña",
-                    inputHintColor: const Color.fromRGBO(239, 121, 42, 0.3),
-                    inputFocusColor: const Color.fromRGBO(15, 67, 116, 1),
-                  ),
+                  // InputLogin(
+                  //   controller: passWordController,
+                  //   mode: TextInputType.name,
+                  //   title: "Contraseña",
+                  //   inputIcon: FontAwesomeIcons.solidUser,
+                  //   isPassWord: true,
+                  //   inputColor: const Color.fromRGBO(239, 121, 42, 1),
+                  //   description: "Ingrese su Contraseña",
+                  //   inputHintColor: const Color.fromRGBO(239, 121, 42, 0.3),
+                  //   inputFocusColor: const Color.fromRGBO(15, 67, 116, 1),
+                  // ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.03,
                   ),
                   ButtonOrange(
                       title: "Iniciar Sesión",
                       onPressed: () async {
-                        bool loginSuccess = await APIManager.logIn(context,
-                            userController.text, passWordController.text);
+                        if (_key.currentState!.validate()) {
+                          bool loginSuccess = await APIManager.logIn(context,
+                              userController.text, passWordController.text);
 
-                        if (loginSuccess && mounted) {
-                          Navigator.pushReplacementNamed(context, '/home');
+                          if (loginSuccess && mounted) {
+                            Navigator.pushReplacementNamed(context, '/home');
+                          }
                         }
                       }),
                   SizedBox(

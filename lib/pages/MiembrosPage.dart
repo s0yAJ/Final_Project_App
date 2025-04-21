@@ -35,10 +35,14 @@ class _MiembrosPageState extends State<MiembrosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange[100],
+      backgroundColor: Colors.amber[700],
       appBar: AppBar(
-        title: const Text('Miembros'),
-        backgroundColor: Colors.orange,
+        title: const Text('Miembros', style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 29
+              ),),
+        centerTitle: true,
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -55,7 +59,7 @@ class _MiembrosPageState extends State<MiembrosPage> {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 12,
-                      vertical: 16), // Aumentamos espacio vertical
+                      vertical: 4), // Aumentamos espacio vertical
                   child: Card(
                     elevation: 3,
                     child: Padding(

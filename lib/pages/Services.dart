@@ -44,9 +44,8 @@ class _ServicesState extends State<Services> {
         title: const Text(
           'Servicios',
           style: TextStyle(
-            color: Colors.amber,
             fontWeight: FontWeight.bold,
-            fontSize: 24,
+            fontSize: 29,
           ),
         ),
         centerTitle: true,

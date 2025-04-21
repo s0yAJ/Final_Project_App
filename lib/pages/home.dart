@@ -1,5 +1,6 @@
+import 'package:final_proyect/Utils/mapaview.dart';
 import 'package:final_proyect/pages/MiembrosPage.dart';
-import 'package:final_proyect/pages/albergues_screen.dart';
+// import 'package:final_proyect/pages/albergues_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'dart:async';
@@ -30,7 +31,7 @@ class _HomeState extends State<Home> {
     },
     {'icon': Icons.person_4_sharp, 'title': 'Miembros', 'color': Colors.blue},
     {'icon': Icons.info, 'title': 'Acerca de', 'color': Colors.green},
-    {'icon': Icons.house, 'title': 'Albergues', 'color': Colors.orange},
+    {'icon': Icons.map_outlined, 'title': 'Albergues', 'color': Colors.orange},
   ];
 
   Timer? _timer;
@@ -185,7 +186,7 @@ class _HomeState extends State<Home> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AlberguesScreen(),
+                builder: (context) => MapaAlbergues(),
               ),
             );
           } else {

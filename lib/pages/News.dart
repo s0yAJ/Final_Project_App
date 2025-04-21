@@ -23,7 +23,13 @@ class _NewsState extends State<News> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amber[700],
-      appBar: AppBar(title: const Text('Noticias')),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Noticias',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 29),
+        ),
+      ),
       body: FutureBuilder<NewModels>(
         future: futureNoticias,
         builder: (context, snapshot) {
@@ -57,9 +63,8 @@ class _NewsState extends State<News> {
                     if (noticia.foto != null && noticia.foto!.isNotEmpty)
                       ClipRRect(
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(13),
-                          topRight: Radius.circular(13)
-                        ),
+                            topLeft: Radius.circular(13),
+                            topRight: Radius.circular(13)),
                         child: Image.network(
                           noticia.foto!,
                           width: double.infinity,

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -6,7 +7,7 @@ class APIManager {
   static Future<bool> logIn(
       BuildContext context, String username, String password) async {
     try {
-      String apiUrl = 'https://adamix.net/defensa_civil/def/registro.php';
+      String apiUrl = 'https://adamix.net/defensa_civil/def/iniciar_sesion.php';
       var url = Uri.parse(apiUrl);
       var request = http.MultipartRequest('POST', url);
 
@@ -17,30 +18,39 @@ class APIManager {
       var response = await request.send();
       final responseBody = await response.stream.bytesToString();
 
-      if (response.statusCode == 200) {
+      var result = jsonDecode(responseBody);
+
+      if (result["exito"] == true) {
         // Verifica el contenido de la respuesta
-        if (responseBody.contains('exito')) {
-          // Ajusta según la respuesta real de tu API
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Sesión iniciada', style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18
+              ),),
+            backgroundColor: Colors.green,
+          ),
+        );
+        return true;
+
+      } else if(result["exito"] == false){
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Sesión iniciada'),
-              backgroundColor: Colors.green,
-            ),
-          );
-          return true;
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Credenciales incorrectas'),
-              backgroundColor: Colors.red,
+              content: Text('Credenciales incorrectas', style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18
+              ),),
+              backgroundColor: const Color.fromARGB(255, 0, 0, 0),
             ),
           );
           return false;
-        }
-      } else {
+      }else{
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error en la conexión: ${response.statusCode}'),
+            content: Text('Error en la conexión: ${response.statusCode}', style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18
+              ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -49,7 +59,10 @@ class APIManager {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error: $e'),
+          content: Text('Error: No tienes acceso a internet!', style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18
+              ),),
           backgroundColor: Colors.red,
         ),
       );
