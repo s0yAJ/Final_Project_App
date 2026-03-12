@@ -70,7 +70,7 @@ class APIManager {
     }
   }
 
-  static Future<void> sendDataToAPI(
+  static Future<bool> sendDataToAPI(
     BuildContext context,
     String cedula,
     String nombre,
@@ -79,34 +79,59 @@ class APIManager {
     String telefono,
     String clave,
   ) async {
-    String apiUrl = 'https://adamix.net/defensa_civil/def/registro.php';
-    var url = Uri.parse(apiUrl);
-    var request = http.MultipartRequest('POST', url);
+    try {
+      String apiUrl = 'https://adamix.net/defensa_civil/def/registro.php';
+      var url = Uri.parse(apiUrl);
+      var request = http.MultipartRequest('POST', url);
 
-    // Add text fields
-    request.fields['cedula'] = cedula;
-    request.fields['nombre'] = nombre;
-    request.fields['apellido'] = apellido;
-    request.fields['correo'] = correo;
-    request.fields['telefono'] = telefono;
-    request.fields['clave'] = clave;
+      // Add text fields
+      request.fields['cedula'] = cedula;
+      request.fields['nombre'] = nombre;
+      request.fields['apellido'] = apellido;
+      request.fields['correo'] = correo;
+      request.fields['telefono'] = telefono;
+      request.fields['clave'] = clave;
 
-    var response = await request.send();
+      var response = await request.send();
+      final responseBody = await response.stream.bytesToString();
 
-    if (response.statusCode == 200) {
+      var result = jsonDecode(responseBody);
+
+      if (result["exito"] == true) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Usuario registrado correctamente', style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            )),
+            backgroundColor: Colors.green,
+          ),
+        );
+        return true;
+      } else {
+        String mensaje = result["mensaje"] ?? 'Hubo un fallo al registrar';
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(mensaje, style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            )),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return false;
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Usuario registrado correctamente'),
-          backgroundColor: Colors.green,
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Hubo un fallo al registrar'),
+          content: Text('Error: No tienes acceso a internet!', style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          )),
           backgroundColor: Colors.red,
         ),
       );
+      return false;
     }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:final_proyect/Utils/mapaview.dart';
 import 'package:final_proyect/pages/MiembrosPage.dart';
-// import 'package:final_proyect/pages/albergues_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'dart:async';
@@ -74,79 +73,79 @@ class _HomeState extends State<Home> {
       padding: EdgeInsets.all(30),
       child: SafeArea(
         bottom: false,
-        child: Column(
-          children: [
-            SizedBox(height: topPadding > 30 ? 10 : 20),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(35),
-              child: Container(
-                color: Colors.white,
-                padding: EdgeInsets.all(7),
-                child: Image.asset(
-                  'assets/banner.png',
-                  width: MediaQuery.of(context).size.width,
-                  height: 125,
-                  fit: BoxFit.cover,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(height: topPadding > 30 ? 10 : 20),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(35),
+                child: Container(
+                  color: Colors.white,
+                  padding: EdgeInsets.all(7),
+                  child: Image.asset(
+                    'assets/banner.png',
+                    width: MediaQuery.of(context).size.width,
+                    height: 125,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 25),
-            SizedBox(
-              height: 200,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: imageList.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        imageList[index],
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        errorBuilder: (context, error, stackTrace) => Container(
-                          color: Colors.grey[200],
-                          child: const Center(child: Icon(Icons.broken_image)),
+              const SizedBox(height: 25),
+              SizedBox(
+                height: 200,
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: imageList.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.asset(
+                          imageList[index],
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            color: Colors.grey[200],
+                            child: const Center(child: Icon(Icons.broken_image)),
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 15),
-            SmoothPageIndicator(
-              controller: _pageController,
-              count: imageList.length,
-              effect: const WormEffect(
-                dotHeight: 8,
-                dotWidth: 8,
-                activeDotColor: Colors.grey,
-                dotColor: Colors.white,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: GridView.count(
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 1.1,
-                  children: gridItems.map((item) {
-                    return _buildGridItem(
-                      item['icon'] as IconData,
-                      item['title'] as String,
-                      item['color'] as Color,
                     );
-                  }).toList(),
+                  },
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 15),
+              SmoothPageIndicator(
+                controller: _pageController,
+                count: imageList.length,
+                effect: const WormEffect(
+                  dotHeight: 8,
+                  dotWidth: 8,
+                  activeDotColor: Colors.grey,
+                  dotColor: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 10),
+              GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 1.1,
+                children: gridItems.map((item) {
+                  return _buildGridItem(
+                    item['icon'] as IconData,
+                    item['title'] as String,
+                    item['color'] as Color,
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
